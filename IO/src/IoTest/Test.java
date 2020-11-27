@@ -11,7 +11,7 @@ import java.io.FileOutputStream;
  */
 public class Test {
     public static void main(String[] args) throws Exception {
-        File f = new File("shi.jpeg");//打开一个文件
+        File f = new File("JAVA学习笔记.txt");//打开一个文件
 
         FileInputStream fis = new FileInputStream(f);//创建一个输入流
         FileOutputStream fo = new FileOutputStream(new File("G:/图片/张国荣.jpeg"));//创建一个输出流

@@ -2,6 +2,7 @@ package buffer;
 
 import java.io.*;
 import java.lang.management.BufferPoolMXBean;
+import java.nio.Buffer;
 
 /**
  * @author TIMI
@@ -9,7 +10,8 @@ import java.lang.management.BufferPoolMXBean;
  */
 public class Test {
     public static void main(String[] args) throws Exception {
-        File f = new File("a.txt");
+        File f = new File("JAVA学习笔记.txt");
+        File f1 = new File("a.txt");
         if(!f.exists()){
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f,true);
@@ -18,11 +20,15 @@ public class Test {
        //BufferedInputStream bis = new BufferedInputStream(new FileInputStream(f));
        // bis.read()
         BufferedReader br = new BufferedReader(new FileReader(f));
-        System.out.println(br.readLine());//读取一个文本最好的方法
+        BufferedWriter fw = new BufferedWriter(new FileWriter(f1));
+        //System.out.println(br.readLine());//读取一个文本最好的方法
         String str ="";
         while((str = br.readLine())!= null){
+            fw.write(str);
+            fw.newLine();
             System.out.println(str);
         }
+        fw.close();
         br.close();
     }
 }

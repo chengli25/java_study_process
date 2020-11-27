@@ -38,13 +38,12 @@ public class Test {
          * 完整创建一个文件路径
          */
         try{
-            File file = new File("IO/abc/def/吃饭.txt");
+            File file = new File("唐诗三百首.txt");
             //判定上层文件夹是否存在
-            File parentfile = file.getParentFile();//返回的是一个对象
-            System.out.println(parentfile);
-            if(!parentfile.exists()){
-                parentfile.mkdirs();
-            }
+            //File parentfile = file.getParentFile();//返回的是一个对象
+            //if(!parentfile.exists()){//查看文件夹是否存在
+            //    parentfile.mkdirs();
+            //}
             //创建文件
             file.createNewFile();
         }catch(Exception e){

@@ -13,6 +13,6 @@ public class Test {
         //将字节流转换为字符流
      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
      String s = br.readLine();
-        System.out.println(s);
+        System.out.println("您从控制台输入的是：" + s);
     }
 }
