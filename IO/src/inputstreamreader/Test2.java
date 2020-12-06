@@ -10,6 +10,7 @@ import java.io.Writer;
  */
 public class Test2 {
     public static void main(String[] args) throws Exception {
+        //将字节流转换为字符流
         Writer wr = new OutputStreamWriter(System.out);
         wr.write("你好");
         wr.flush();

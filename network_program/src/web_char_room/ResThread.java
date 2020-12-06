@@ -12,11 +12,9 @@ import java.net.Socket;
  */
 public class ResThread extends Thread{
     private Socket s;
-    private String str;
 
-    public ResThread(Socket s,String str){
+    public ResThread(Socket s){
         this.s = s;
-        this.str = str;
     }
 
     @Override
@@ -27,7 +25,7 @@ public class ResThread extends Thread{
                 InputStream is = s.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String content = br.readLine();
-                System.out.println(str + ':' +'\n' + content+'\n');
+                System.out.println(content);
             } catch (IOException e) {
                 e.printStackTrace();
             }

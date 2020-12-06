@@ -13,23 +13,32 @@ import java.util.Scanner;
  */
 public class SendThread extends Thread{
     private Socket s;
+    private String name;
 
-    public SendThread(Socket s){
+    public SendThread(Socket s,String name){
         this.s = s;
+        this.name = name;
     }
 
     @Override
     public void run() {
         Scanner sc =new Scanner(System.in);
         while(true){
-            OutputStream os = null;
             try {
-                os = s.getOutputStream();
+                OutputStream os = s.getOutputStream();
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-                bw.write(sc.nextLine());
+
+
+                String con =sc.nextLine();
+                bw.write(name);
                 bw.newLine();
                 bw.flush();
-            } catch (IOException e) {
+                Thread.sleep(1);
+                bw.write(con);
+                bw.newLine();
+                bw.flush();
+
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
 

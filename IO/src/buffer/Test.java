@@ -19,7 +19,7 @@ public class Test {
         }
        //BufferedInputStream bis = new BufferedInputStream(new FileInputStream(f));
        // bis.read()
-        BufferedReader br = new BufferedReader(new FileReader(f));
+        BufferedReader br = new BufferedReader(new FileReader(f),512);
         BufferedWriter fw = new BufferedWriter(new FileWriter(f1));
         //System.out.println(br.readLine());//读取一个文本最好的方法
         String str ="";
