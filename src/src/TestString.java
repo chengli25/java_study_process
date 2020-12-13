@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -44,17 +45,43 @@ public class TestString {
         //
         //String s = sc.nextLine();
         //System.out.println(s);
+        //    Scanner sc = new Scanner(System.in);
+        //    while(true) {
+        //        int a = sc.nextInt();
+        //        for (int i = 0; i < a; i++) {
+        //            for (int j = 0; j < a; j++) {
+        //                if (i == j || i + j == a - 1) {
+        //                    System.out.print("*");
+        //                    continue;
+        //                }
+        //                System.out.print(" ");
+        //            }
+        //            System.out.println();
+        //        }
+        //    }
+        //Scanner sc = new Scanner(System.in);
+        //while(!sc.hasNextInt(1)){
+        //    System.out.println(sc.next());
+        //}
+        ////System.out.println(sc.next());
 
-        Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        for(int i=0;i<a;i++){
-            for(int j=0;j<a;j++){
-                if(i == j || i + j == a-1)
-                    System.out.print("*");
-                System.out.print(" ");
+        try (Scanner sc = new Scanner(new File("唐诗三百首.txt"))) {
+            File f = new File("a.txt");
+            BufferedWriter os = new BufferedWriter(new FileWriter(f,true));
+
+            while(sc.hasNext()){
+                String s = sc.nextLine();
+                if(!f.exists()){
+                    f.createNewFile();
+                }
+                os.write(s);
+                os.newLine();
             }
-            System.out.println();
+            os.flush();
+            os.close();
 
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
