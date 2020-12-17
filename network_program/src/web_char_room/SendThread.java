@@ -27,8 +27,6 @@ public class SendThread extends Thread{
             try {
                 OutputStream os = s.getOutputStream();
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
-
-
                 String con =sc.nextLine();
                 bw.write(name);
                 bw.newLine();
@@ -37,7 +35,6 @@ public class SendThread extends Thread{
                 bw.write(con);
                 bw.newLine();
                 bw.flush();
-
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }

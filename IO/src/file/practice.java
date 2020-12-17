@@ -9,7 +9,9 @@ import java.text.DecimalFormat;
  */
 public class practice {
     public static void main(String[] args) throws Exception {
+
         DecimalFormat df = new DecimalFormat(".00");//数字的格式化为字符串
+
         //能从文件中读取水果信息
         File f1 = new File("fruit.txt");//打开一个文件
         File f2 = new File("副本fruit.txt");//打开需要写入的文件

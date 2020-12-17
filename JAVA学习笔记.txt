@@ -356,7 +356,8 @@ shift+F8:  在debug模式下，跳出；
 shift+F9:  等效于debug；
 shift+F10：run；
 alt+上：向上移动；
-
+alt+ 方向左键；返回进入函数的地方
+ctrl + 鼠标左键：进入具体的函数
 文件名同类名；
 
 jdk: java开发工具包；

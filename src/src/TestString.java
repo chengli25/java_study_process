@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.Scanner;
 
 import static java.lang.Math.sqrt;
@@ -65,38 +66,30 @@ public class TestString {
         //}
         ////System.out.println(sc.next());
 
-        try (Scanner sc = new Scanner(new File("唐诗三百首.txt"))) {
-            File f = new File("a.txt");
-            BufferedWriter os = new BufferedWriter(new FileWriter(f,true));
+        //try (Scanner sc = new Scanner(new File("唐诗三百首.txt"))) {
+        //    File f = new File("a.txt");
+        //    BufferedWriter os = new BufferedWriter(new FileWriter(f,true));
+        //
+        //    while(sc.hasNext()){
+        //        String s = sc.nextLine();
+        //        if(!f.exists()){
+        //            f.createNewFile();
+        //        }
+        //        os.write(s);
+        //        os.newLine();
+        //    }
+        //    os.flush();
+        //    os.close();
+        //
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //}
 
-            while(sc.hasNext()){
-                String s = sc.nextLine();
-                if(!f.exists()){
-                    f.createNewFile();
-                }
-                os.write(s);
-                os.newLine();
-            }
-            os.flush();
-            os.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }
