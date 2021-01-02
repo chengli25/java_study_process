@@ -23,16 +23,8 @@ public class SendThread extends Thread {
     public void run() {
         Scanner sc = new Scanner(System.in);
         while(true) {
-            try {
-                OutputStream os = s1.getOutputStream();
-                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
                 String content = sc.nextLine();
-                bw.write(content);
-                bw.newLine();
-                bw.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+               Util.send(s1,content);
         }
     }
 }

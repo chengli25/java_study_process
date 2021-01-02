@@ -1,23 +1,32 @@
 package tcp_newwork_chat_room;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author TIMI
  * @Date 2020/12/17 - 9:04
  */
 public class Sever{
+    public Sever() throws IOException {
+        ServerSocket ss = new ServerSocket(9997);
+        List<Socket> socketList = new ArrayList<>();
+
+        while(true) {
+            Socket s = ss.accept();
+            System.out.println("连接成功");
+            socketList.add(s);
+            //为每一个客户端启动一个线程，用来监听线程是否有消息传递过来
+            new ServerMsgThread(s,socketList).start();
+        }
+    }
     public static void main(String[] args) throws Exception{
-        ServerSocket ss = new ServerSocket(9998);
-        Socket s = ss.accept();
-        //不停的接受发送信息
-        //第一个线程负责接受数据
-        ResThread rt = new ResThread(s);
-        rt.start();
-        //第二个线程负责发送数据
-        SendThread st = new SendThread(s);
-        st.start();
+
+
+
     }
 
 }

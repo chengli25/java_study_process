@@ -1,4 +1,4 @@
-package homework;
+package homework.important_arthtic;
 
 import java.util.Scanner;
 
@@ -12,8 +12,8 @@ public class NumberOf1 {
         int count =0;
         System.out.println("请输入一个整数：");
         int m = sc.nextInt();
-        while(m!=0){
-            m=m&(m-1);
+        while(m != 0){
+            m=m & (m-1);
             count++;
         }
         System.out.println(count);

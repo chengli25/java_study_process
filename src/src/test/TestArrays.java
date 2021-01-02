@@ -1,3 +1,5 @@
+package test;
+
 import java.net.UnknownHostException;
 
 import static java.net.InetAddress.getLocalHost;

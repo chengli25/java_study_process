@@ -10,8 +10,10 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class TestFixed {
     private static AtomicInteger i = new AtomicInteger();
+
     public static void main(String[] args) {
-        ExecutorService es = Executors.newFixedThreadPool(3);
+        ExecutorService es = Executors.newFixedThreadPool(4);
+
         for(int j = 0;j < 10; j++) {
             int key = TestFixed.i.incrementAndGet();
             System.out.println("创建子线程" + key);

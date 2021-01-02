@@ -14,12 +14,11 @@ import java.net.URLConnection;
 public class Url {
 
     public static void main(String[] args) throws Exception{
-        URL u = new URL("http://5b0988e595225.cdn.sohucs.com/images/20170825/92b5798987ac454387479d4354290145.jpeg");
-
+        URL u = new URL("https://blog.csdn.net/weixin_39121325/article/details/85781878?utm_medium=distribute.pc_category.none-task-blog-new-7.nonecase&depth_1-utm_source=distribute.pc_category.none-task-blog-new-7.nonecase");
         URLConnection uc = u.openConnection();//打开链接
 
         InputStream is = uc.getInputStream();//读取字节流
-        FileOutputStream fos = new FileOutputStream(new File("程序员.jpg"));//创建文件输出流
+        FileOutputStream fos = new FileOutputStream(new File("H:/桌面/程序员.jepg"));//创建文件输出流
 
         byte[] bs = new byte[1024];//用一个字节数组存入字节信息
         int len;
@@ -27,7 +26,7 @@ public class Url {
             fos.write(bs,0,len);//将字节数组中的信息写入文件中
         }
         fos.flush();//更新
-        fos.close();//关闭
+        fos.close();//关闭输出流
         is.close();//关闭输入流
         System.out.println("下载完毕...");
     }

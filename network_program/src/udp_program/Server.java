@@ -15,7 +15,7 @@ public class Server {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
         DatagramSocket ds = new DatagramSocket(7890);
-
+  
         byte[] by = new byte[1024];
         DatagramPacket dp = new DatagramPacket(by,1024);//用来接收数据的
         ds.receive(dp);//接收数据
