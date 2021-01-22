@@ -13,7 +13,7 @@ public class OneTimeOfNum {
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,5,4,3,2,1};
         HashMap<Integer, Boolean> hashmap = new HashMap<>();
-        Set<Integer> hashset = new HashSet<>();
+        Set<Integer> hashset;
         //将每个数值作为关键字添加进入一个map集合中，如果重复出现就将它的值设置成true
         for (int i = 0; i < arr.length; i++) {
             if(!hashmap.containsKey(arr[i])){

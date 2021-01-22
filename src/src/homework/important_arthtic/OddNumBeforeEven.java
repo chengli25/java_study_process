@@ -9,17 +9,26 @@ import java.util.Arrays;
 public class OddNumBeforeEven {
     public static void main(String[] args) {
         int []arr={1,2,3,4,5,6,7,8,9,10};
-        int i;
-        int j;
-        for(i=0;i<10;i++){
-            for(j=i+1;j<10;j++){
-                if(arr[j]%2!=0){
-                    int tmp=arr[j];
-                    arr[j]=arr[i];
-                    arr[i]=tmp;
-                }
+        int[]b = a(arr);
+
+        System.out.println(Arrays.toString(b));
+
+    }
+
+    private static int[] a(int[] arr) {
+        int i = 0, j = arr.length - 1;
+        while(i < j){
+            while(arr[i] % 2 != 0){
+                i++;
             }
-            System.out.print(arr[i]+" ");
+            while(arr[j] % 2 == 0){
+                j--;
+            }
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+
         }
+        return arr;
     }
 }
