@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+                                                                <!-- 标签的使用  -->
+<!--
+    <properties></properties>：mybatis可以使用这个标签来引入外部properties配置文件的内容；
+                               属性resource：引入类路径下的资源
+                               属性URL：引入网路路径或者磁盘路径下的资源信息
+
+    <settings></settings>:包含很多的重要设置项，里面使用<setting></setting>
+    <setting></setting>: 属性name：设置项名
+                         属性value：设置项取值
+                        mapUnderscoreToCamelCase：支持驼峰命名法，可以解决数据表对应对象类的属性名和数据表字段名不一致的情况
+    <typeAliases></typeAliases>:别名处理器：可以为java类型起别名；
+    <typeHandlers></typeHandlers>:类型处理器；将数据库字段类型和java中的属性类型进行适配
+    <plugins></plugins>插件处理器：
+    <environments></environments>:环境配置里面有多个environment标签；default属性：用来指定使用某种环境，这样就能达到切换不同的环境
+        <environment></environment>:具体配置环境信息，必须里面包含以下两个标签
+                                    属性：id：环境的唯一标识符，对于不同的场景可能需要不同的环境，就通过这个唯一的标识符来确定（更改default的值）
+            transactionManager标签：事务管理器
+                    属性：type：事务管理器的类型JDBC|MANAGED
+            dataSource标签：数据源
+                    属性：type：AUNPOOL|POOLED|JNDI
+
+    <databaseldProvider></databaseldProvider>:不同数据库的支持
+    <mappers></mappers>将SQL映射文件注册到全局配置中
+-->
+
+<!DOCTYPE configuration  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="dbconfig.properties"></properties>
+
+    <settings>
+        <!--用来设置驼峰命名法，解决取别名 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+<!--        设置数据库支持NULL-->
+        <setting name="jdbcTypeForNull" value="NULL"/>
+<!--        开启全局二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <!-- 给java类型起别名（不区分大小写）-->
+    <typeAliases>
+        <!--为某个java类型起别名 type指要起别名的全类名，默认别名是类名的小写；alias：指定新的别名-->
+        <!--        <typeAlias type="com.test.mybatis.Employees" alias="emp"/>-->
+        <!--批量起别名 :可以为某个包下的所有类批量其别名，name：指定包（当前包以及下面的所有包）-->
+<!--        <package name="com.test"/>-->
+        <!-- 在批量起别名的情况下，(在包下有多个类名相同的java的情况使用多)使用@Alias为某个类型指定新的别名       -->
+    </typeAliases>
+
+<!--    识别不同数据库厂商的标识-->
+
+    <!--<databaseIdProvider type="DB_VENDOR">-->
+    <!--&lt;!&ndash;为不同的数据库厂商起别名 &ndash;&gt;-->
+    <!--<property name="MySQL" value="mysql"/>-->
+    <!--<property name="Oracle" value="oracle"/>-->
+    <!--<property name="SQL Server" value="sqlserver"/>-->
+    <!--</databaseIdProvider>-->
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!-- 将写好的SQL映射文件一定要注册到全局配置文件中 resource：类路径  URL：磁盘，或者网络路径下的资源
+        class属性：注册接口，
+        1.有SQL映射文件，映射文件名必须和接口同名并且放在同一目录下
+        2.没有SQL映射文件，所有的SQL都是利用注解写在接口上-->
+        <mapper resource="EmployeesMapper.xml"/>
+<!--        <mapper class="com.test.mybatis.EmployeesMapperAnnotation"/>-->
+        <!--批量注册： anme:包名-->
+<!--        <package name="com.test.mybatis"/>-->
+<!--        <mapper resource="EmployeesMapperDynamicSql.xml"></mapper>-->
+    </mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.EmployeesMapper"><!-- 名称空间:指定为借口的全类名-->
+<!--    开启二级缓存
+eviction：缓存的回收策略
+        LRU:最近最少使用的：移除最长时间不被使用的对象
+        FIFO：先进先出：按对象进入缓存的顺序来移除他们
+        SOFT：软引用：移除基于垃圾回收器状态和软引用规则的对象
+        WEAK：弱引用：更积极的移除基于垃圾收集器装填和弱引用规则的对象
+        默认是LRU
+flushInterval:缓存刷新间隔（缓存多长时间清空一次，默认不清空，可以设置一个毫秒值）
+readOnly:是否只读；true：只读（mybatis认为所有从缓存中获取数据的操作都是只读，不会修改数据，这样的方式不安全）
+                  false：非只读：mybatis认为获取的数据可能会被修改。mybatis会利用序列化或者反序列化的方式克隆一份数据给你。
+size：缓存存放多少元素；
+type：指定自定义缓存的全类名
+-->
+<!--    <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>-->
+<!--    可以指定和某个空间名称下的缓存一样-->
+<!--    <cache-ref namespace="mingcheng"></cache-ref>-->
+    <cache eviction="FIFO" flushInterval="60000" readOnly="false"></cache>
+    <select id="getEmpById" resultType="com.test.mybatis.Employees" ><!-- id：唯一标识(和接口中的方法进行绑定)；resultType：返回值类型 databaseId:设置执行的数据库厂商类型，值是全局文佳那种给起的别名-->
+        select * from employees where id = #{id} and last_name = #{LastName}<!--#{id} 从传递过来的参数中取出id值 -->
+    </select>
+
+    <!-- 插入数据 useGeneratedKeys="true":获取自增主键值；keyProperty="id"：将获取的主键值赋给id-->
+    <insert id="addEmp" useGeneratedKeys="true" keyProperty="id">
+        insert into employees(last_name,gender,email) values(#{lastName},#{gender},#{email})
+    </insert>
+
+    <!--更新方法 -->
+    <update id="updateEmp">
+        update employees set last_name = #{lastName},email=#{email},gender=#{gender} where id = #{id}
+    </update>
+
+<!--    删除数据-->
+    <delete id="deleteEmpById">
+        delete from employees where id = #{id};
+    </delete>
+
+    <!--返回值类型 -->
+    <!--
+    当返回值类型时List的时候,返回值类型要写集合中的泛型参数
+    -->
+    <select id="getEmpByLastNameLike" resultType="com.test.mybatis.Employees">
+        select * from employees where last_name like #{lastName};
+    </select>
+
+<!--    //返回一条记录的map；可以就是列名，值就是对应的值-->
+<!--    Map<String ,Object> getEmpByIdReturnMap(Integer id);-->
+    <select id="getEmpByIdReturnMap" resultType="map">
+        select * from employees where id =#{id};
+    </select>
+
+<!--    //多条记录封装在map中：Map<Integer,Employees>;键是记录的主键，值是每个对象-->
+<!--    Map<Integer,Employees> getEmpByLastNameReturnMap(String lastname);-->
+    <select id="getEmpByLastNameReturnMap" resultMap="myemp">
+        select * from employees where last_name like #{lastname};
+    </select>
+
+    <!--自定一个字段封装规则 -->
+<!--    对于嵌套封装；collection表签用于封装集合类的元素，而assonation封装其他值 -->
+<!--    分步查询就是将另一个SQL语句的结果中的某个字段的值传入SQL语句中。值需要在封装语句中。用select属性来执行对应的SQL语句，然后传回语句中需要的字段的值，当需要多值返回的时候可以将其封装成map返回，fetchtype属性表示延迟查询和立即查询两个-->
+<!--    在自定义规则中有一个鉴别器标签 discriminator-->
+    
+    <resultMap id="myemp" type="com.test.mybatis.Employees">
+        <!--指定主键列的封装规则 column：指定主键字段；property:指定对应的javabean属性 -->
+        <id column="id" property="id"></id>
+<!--        JavaType对应的是列值对应的java类型，column表示对应的字段;然后进行新的对应的封装规则（注意其中新的规则中的resultType不能少）-->
+<!--        <discriminator javaType="string" column="gender">-->
+<!--            <case value="男" resultType="com.test.mybatis.Employees"></case>-->
+<!--            <case value="女"></case>-->
+<!--        </discriminator>-->
+<!--        定义普通字段的封装规则-->
+        <result column="last_name" property="lastName"></result>
+<!--        其余的如果不指定，那么会自动封装，推荐全部指定-->
+        <result column="gender" property="gender"></result>
+        <result column="email" property="email"></result>
+    </resultMap>
+</mapper>
+<!--参数的获取方式-->
+<!--
+#{}:是以预编译的形式将参数设置到SQL语句中；preparedstatement；
+里面的参数设置
+        某些数据库对于null的处理不支持，所以设置参数#{参数名，jdbcType=NULL};或者jdbcTypeForNull=NULL也可以在全局设置中用setting设置jadbTypeForNull
+
+${}：取出值并且瓶装在SQL语句中，有安全问题
+${}的使用情况：在不允许使用占位符的地方，我们可以使用${}来拼串，使得字符完整。比如表名${year}_salary where .....
+-->
+<!--resultMap-->
+<!--
+    自定义属性和查询字段的对应关系；在查询语句的外面定义一个resultMap标签
+-->

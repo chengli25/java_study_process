@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主菜单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        hr {
+            border-color:#FF7F00;
+        }
+        table {
+
+            width: 600px;
+            margin: auto;
+            border: 1px black solid;
+
+        }
+        th {
+            margin: 20px;
+            padding: 20px;
+        }
+    </style>
+    <script src="js/jquery-1.7.2.js"></script>
+    <script>
+        $(function(){
+
+
+                $.getJSON("http://localhost:8080/Log_in_war_exploded/ajavaServletT","action=getAllFiles",function(data){
+                    for(let i=0; i<data.length; i++) {
+                        if(data !="" && data !=null ){
+                            ($("<tr></tr>").appendTo($("#li"))).html("<td>data.filename<td/>+<td>data.size<td/> + <td>data.type</td>");
+                            // alert(data.filename + data.type);
+                        } else {
+                            alert("没有数据");
+                        }
+
+                    }
+
+                });
+
+        });
+
+
+
+
+    </script>
+</head>
+<body>
+<h1>文件目录</h1>
+<hr>
+<br>
+<table>
+    <tr id="li">
+        <th>文件名称</th>
+        <th>文件大小</th>
+        <th>文件类型</th>
+    </tr>
+</table>
+<input type="submit" id ="lili"/>
+<input type = "text" id ="test"/>
+</body>
+</html>

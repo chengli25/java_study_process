@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dynamicsql.EmployeesMapperDynamicSql">
+<!--    if的使用-->
+<!--    查询员工，要求：携带了哪个字段查询条件就带上这个字段的值-->
+<!--    trim的使用-->
+    <select id="getEmpsByConditionTrim" resultType="com.test.mybatis.Employees" >
+        select * from employees
+    --     prefix给标签里面整个拼串后的字符串加一个前缀  suffix:给拼串加后缀
+    --     prefixoverrides：表示将拼串中的前缀给去掉 suffixoverrides:给拼串的后缀覆盖掉
+        <trim suffixOverrides="and">
+            <!-- 在传过来的参数中取值，然后判断-->
+            <if test="id != 0">id=#{id} and </if>
+            <if test="lastName != null and lastName !=''">last_name = #{lastName} and </if>
+            <if test="email != null ">email = #{email} and  </if>
+            <if test="gender != null">gender =#{gender}</if>
+        </trim>
+    </select>
+
+<!--    测试内置参数 _parameter:整个参数 ；_databseId:如果配置了数据库厂商，那么就代表当前数据库的别名-->
+<!--    bind标签：可以将表达式的值赋给一个变量方便后面来引用这个变量的值-->
+    <select id = "getEmpTestInnerParameter" resultType="com.test.mybatis.Employees" >
+    <bind name="_lastname" value="'%'+lastName+'%'"/>
+        select * from employees
+        <where>
+            <if test="_parameter!=null"> last_name like #{_lastname}</if>
+        </where>
+    </select>
+
+<!--    测试set标签-->
+    <update id="updateEmp">
+        update  employees
+        <set>
+            <if test="lastName != 0">last_name=#{lastName},</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="gender!=null">gender=#{gender}</if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+<!--    测试choose-->
+    <select id="getEmpsByConditionChoose" resultType="com.test.mybatis.Employees">
+        select  * from employees
+        <where>
+            <choose>
+                <when test="id!=0">id=#{id}</when>
+                <when test="lastName!=null">last_name like #{lastName}</when>
+                <when test="email!=null">email=#{email}</when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+<!--    测试批量插入-->
+    <insert id="addEmps">
+        insert into employees(
+        <include refid="insertColumn">
+            <property name="testid" value="id"/>
+        </include>
+
+        )
+--         values
+--         collection：在哪个集合中遍历
+--         item：遍历出的每个元素
+--         separator：分隔符
+        <foreach collection="emps" separator="," item="emp">
+            (#{emp.lastName},#{emp.email},#{emp.gender})
+        </foreach>
+    </insert>
+
+<!--    抽取可重用的SQL片段，方便后面引用-->
+<!--    将这些SQL片段抽取出来后，在其他地方如果需要引用则直接用include标签，并且设置引用的refid就行-->
+<!--    include还可以自定义一些property，SQL标签内部就能使用自定义的属性,sql内部就能使用自定义的属性取值的正确方式${propername}-->
+    <sql id="insertColumn">
+        last_name,email,gender,${testid}
+    </sql>
+
+</mapper>
