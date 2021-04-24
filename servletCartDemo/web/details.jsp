@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8" %>
-<%@ page import="entity.Items"%>
+<%@ page import="pojo.Items"%>
 <%@ page import="dao.ItemsDAO"%>
 <%
 String path = request.getContextPath();
@@ -25,14 +25,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="js/lhgcore.js"></script>
     <script type="text/javascript" src="js/lhgdialog.js"></script>
     <script type="text/javascript">
+
       function selflog_show(id)
       { 
-         var num =  document.getElementById("number").value; 
+         let num =  document.getElementById("number").value;
          J.dialog.get({id: 'haoyue_creat',title: '购物成功',width: 600,height:400, link: '<%=path%>/servlet/CartServlet?id='+id+'&num='+num+'&action=add', cover:true});
       }
       function add()
       {
-         var num = parseInt(document.getElementById("number").value);
+         let num = parseInt(document.getElementById("number").value);
          if(num<100)
          {
             document.getElementById("number").value = ++num;
@@ -52,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <style type="text/css">
 	   hr{
 	     
-	     border-color:FF7F00; 
+	     border-color:#FF7F00;
 	   }
 	   
 	   div{
@@ -97,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <table width="750" height="60" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <!-- 商品详情 -->
-          <% 
+          <%
              ItemsDAO itemDao = new ItemsDAO();
              Items item = itemDao.getItemsById(Integer.parseInt(request.getParameter("id")));
              if(item!=null)
@@ -122,7 +123,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                </tr> 
              </table>
              <div id="cart">
-               <img src="images/buy_now.png"><a href="javascript:selflog_show(<%=item.getId()%>)"><img src="images/in_cart.png"></a><a href="servlet/CartServlet?action=show"><img src="images/view_cart.jpg"/></a>
+                <%--这是加入购物车，查看购物车的按钮--%>
+               <img src="images/buy_now.png">
+                 <a href="javascript:selflog_show(<%=item.getId()%>)"><img src="images/in_cart.png"></a>
+                 <a href="servlet/CartServlet?action=show"><img src="images/view_cart.jpg"/></a>
              </div>
           </td>
           <% 
@@ -155,7 +159,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   }
               }
               Cookie cookie = new Cookie("ListViewCookie",list);
-              response.addCookie(cookie);
+              com.zero.response.addCookie(cookie);
           
           %>
           <!-- 浏览过的商品 -->

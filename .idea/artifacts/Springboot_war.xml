@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Springboot:war">
+    <output-path>$PROJECT_DIR$/../Springboot/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Springboot</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Springboot-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Springboot:war exploded" />
+      <element id="dir-copy" path="$PROJECT_DIR$/../SpringBoot" />
+    </root>
+  </artifact>
+</component>

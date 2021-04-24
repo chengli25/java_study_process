@@ -1,17 +1,21 @@
 package dao;
 
+import pojo.Items;
+import util.DBHelper;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import util.DBHelper;
-
-import entity.Items;
-
 //商品的业务逻辑类
 public class ItemsDAO {
 
+    public static void main(String[] args) {
+        ItemsDAO itemsDAO = new ItemsDAO();
+        ArrayList<Items> items = itemsDAO.getAllItems();
+
+    }
 	// 获得所有的商品信息
 	public ArrayList<Items> getAllItems() {
 		Connection conn = null;
@@ -57,7 +61,6 @@ public class ItemsDAO {
 				}
 			}
 		}
-
 	}
 
 	// 根据商品编号获得商品资料
@@ -70,7 +73,7 @@ public class ItemsDAO {
 			String sql = "select * from items where id=?;"; // SQL语句
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, id);
-			rs = stmt.executeQuery();
+			rs = stmt.executeQuery();            
 			if (rs.next()) {
 				Items item = new Items();
 				item.setId(rs.getInt("id"));

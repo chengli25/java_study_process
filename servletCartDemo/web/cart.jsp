@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
-<%@ page import="entity.Cart" %>
-<%@ page import="entity.Items" %>
+<%@ page import="pojo.Cart" %>
+<%@ page import="pojo.Items" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				            Items i = it.next();
 				     %> 
 				<tr name="products" id="product_id_1">
-					<td class="thumb"><img src="images/<%=i.getPicture()%>" /><a href=""><%=i.getName()%></a></td>
+					<td class="thumb"> <img src="images/<%=i.getPicture()%>" /> <a href=""><%=i.getName()%></a> </td>
 					<td class="number"><%=i.getPrice() %></td>
 					<td class="price" id="price_id_1">
 						<span><%=i.getPrice()*goods.get(i) %></span>

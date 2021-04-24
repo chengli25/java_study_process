@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="FileUpload_Download:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/FileUpload_Download_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="FileUpload_Download/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="FileUpload_Download" />
+          <element id="module-output" name="Json_Ajax" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/FileUpload_Download/web/lib/commons-fileupload-1.2.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/FileUpload_Download/web/lib/commons-io-1.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../Data/驱动jar包/文件上传和下载/commons-fileupload-1.2.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/../../Data/驱动jar包/文件上传和下载/commons-io-1.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/Json_Ajax/web/lib/gson-2.2.4.jar" />
+          <element id="library" level="module" name="JUnit4" module-name="Json_Ajax" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Json_Ajax/web/Web" />
+    </root>
+  </artifact>
+</component>

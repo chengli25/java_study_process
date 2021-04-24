@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a621c54d-09fb-4370-8b44-23c0781688b6" name="Cart" url="http://123.57.220.238">
+        <fileTransfer rootFolder="/opt/apache-tomcat-8.0.50/" accessType="SFTP" sshConfigId="fdf5326b-436f-4ec7-b837-651e3045fa67" sshConfig="Cart">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

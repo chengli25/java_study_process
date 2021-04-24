@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
-<%@ page import="entity.Items"%>
+<%@ page import="pojo.Items"%>
 <%@ page import="dao.ItemsDAO"%>
 <%
 String path = request.getContextPath();
@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<style type="text/css">
 	   hr{
-	    border-color:FF7F00; 
+	    border-color:#FF7F00;
 	   }
 	   div{
 	      float:left;
@@ -53,18 +53,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td>
           
           <!-- 商品循环开始 -->
-           <% 
-               ItemsDAO itemsDao = new ItemsDAO(); 
+           <%
+               ItemsDAO itemsDao = new ItemsDAO();
                ArrayList<Items> list = itemsDao.getAllItems();
+
                if(list!=null&&list.size()>0)
                {
 	               for(int i=0;i<list.size();i++)
 	               {
 	                  Items item = list.get(i);
-           %>   
+           %>
           <div>
              <dl>
                <dt>
+
                  <a href="details.jsp?id=<%=item.getId()%>"><img src="images/<%=item.getPicture()%>" width="120" height="90" border="1"/></a>
                </dt>
                <dd class="dd_name"><%=item.getName() %></dd> 

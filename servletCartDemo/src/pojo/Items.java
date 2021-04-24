@@ -1,4 +1,4 @@
-package entity;
+package pojo;
 
 //…Ã∆∑¿‡
 public class Items {
