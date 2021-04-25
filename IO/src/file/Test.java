@@ -1,9 +1,6 @@
 package file;
 
-import com.sun.org.apache.xpath.internal.res.XPATHErrorResources_sv;
-
 import java.io.File;
-import java.io.IOException;
 
 /**
  * @author TIMI
@@ -12,7 +9,15 @@ import java.io.IOException;
 public class Test {
     public static void main(String[] args) throws Exception {
        // try{
-       //     File file = new File("abc/def/chifan.txt");
+           File file = new File("abc/def/chifan.txt");
+           if(file.exists()) {
+               System.out.println("文件存在");
+           }
+           else{
+               System.out.println("文件不存在");
+               file.createNewFile();
+           }
+        System.out.println(file.getAbsolutePath());
        ////     System.out.println( file.exists());//查看文件是否存在
        ////
        ////     System.out.println(file.getParent());//获取上一层文件夹的对象
@@ -37,17 +42,17 @@ public class Test {
         /**
          * 完整创建一个文件路径
          */
-        try{
-            File file = new File("唐诗三百首.txt");
-            //判定上层文件夹是否存在
-            //File parentfile = file.getParentFile();//返回的是一个对象
-            //if(!parentfile.exists()){//查看文件夹是否存在
-            //    parentfile.mkdirs();
-            //}
-            //创建文件
-            file.createNewFile();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        //try{
+        //    File file = new File("唐诗三百首.txt");
+        //    //判定上层文件夹是否存在
+        //    //File parentfile = file.getParentFile();//返回的是一个对象
+        //    //if(!parentfile.exists()){//查看文件夹是否存在
+        //    //    parentfile.mkdirs();
+        //    //}
+        //    //创建文件
+        //    file.createNewFile();
+        //}catch(Exception e){
+        //    e.printStackTrace();
+        //}
     }
 }
