@@ -1,6 +1,7 @@
 package test;
 
-import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author TIMI
@@ -56,6 +57,10 @@ public class Test {
         //0000 0000 0000 0000 0000 0000 0000 0001
         //原码
         //0000 0000 0000 0000 0000 0000 0010 1000
+        Queue<String> q = new LinkedList<>();
+        
 
-    }
+
+        }
+
 }

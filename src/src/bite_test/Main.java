@@ -1,20 +1,17 @@
 package bite_test;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
-/**
- * @author: Zero
- * @Date: 2021/4/2 - 16:29
- * @since: jdk 1.8
- */
-public class MinStepToFie {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Set<String> list = new HashSet<>();
-        while(sc.hasNext()){
-            list.add(sc.nextLine());
+public class Main {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        Set<String> set = new HashSet<>();
+        while (scanner.hasNext()){
+            set.add(scanner.next());
         }
-        System.out.println(list.size());
+        System.out.println(set.size());
+        scanner.close();
     }
-
 }

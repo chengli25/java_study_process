@@ -1,5 +1,7 @@
 package basic_class;
 
+import org.junit.Test;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -15,9 +17,9 @@ public class TestReflex {
      }
 
 
-
+        @Test
      //Class方法测试
-     public static void main(String[] args) throws ClassNotFoundException, NoSuchFieldException {
+     public void test() throws ClassNotFoundException, NoSuchFieldException {
          //获取class的三种方式
          //方式一:适用于传送过来的是一个object类，而程序员不知道具体是什么类的情况
          person p1 = new person();
@@ -59,6 +61,7 @@ public class TestReflex {
          }
          Field f2 = c3.getDeclaredField("name");
          f2.setAccessible(true);
+
          System.out.println("私有属性：" + f2);
 
          /**
@@ -91,8 +94,24 @@ public class TestReflex {
          for(Constructor constructor : constructors) {
              System.out.println("获取构造方法：" + constructor.toString());
          }
+
+         Method method;
+
+         {
+             try {
+                 System.out.println("kaisih");
+                 method = getClass().getDeclaredMethod("say");
+                 System.out.println(method);
+             } catch (NoSuchMethodException e) {
+                 e.printStackTrace();
+             }
+
      }
 
+     }
+    private void say(int x){
+        System.out.println("private say()...");
+    }
 
 }
 

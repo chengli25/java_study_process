@@ -14,7 +14,7 @@ public class Achieve {
     }
     public static String[] mySplit(String s) {
         char[] s1 = s.toCharArray();
-        String[] str= {null,null,null,null};
+        String[] str= new String[4];
         int j = 0, k = 0;
         for(int i = 0; i < s.length(); i++){
             if(s1[i] == '.'){
